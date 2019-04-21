@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">5.1.1.GameListWithFile</string>
+    <string name="delete">Удалить</string>
+    <string name="games">Overwatch;Starcraft 2;Diablo3;Hearthstone;</string>
+</resources>
