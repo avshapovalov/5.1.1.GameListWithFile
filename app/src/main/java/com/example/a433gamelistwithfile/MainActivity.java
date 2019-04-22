@@ -29,10 +29,10 @@ public class MainActivity extends AppCompatActivity {
     private GameListAdapter adapter;
     private List<Game> gameList = new ArrayList<>();
     public static final String FOLDER_NAME = "MY FOLDER";
-    private static final String FILE_NAME = "games.txt";
-    private static final String LOG_TAG = "СМОТРИ СЮДА";
-    private Writer writer;
-    File gameFile;
+    public static final String FILE_NAME = "games.txt";
+    public static final String LOG_TAG = "СМОТРИ СЮДА";
+    public Writer writer;
+    public File gameFile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
         return file;
     }
 
-    private void saveText(String game) {
+    public void saveText(String game) {
         gameFile = getNoteFile();
         try {
             writer = new FileWriter(gameFile);
@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private String loadText() {
+    public String loadText() {
         gameFile = getNoteFile();
         if (!gameFile.canRead()) {
             return null;

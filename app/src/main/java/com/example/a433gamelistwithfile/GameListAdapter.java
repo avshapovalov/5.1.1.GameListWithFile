@@ -1,12 +1,14 @@
 package com.example.a433gamelistwithfile;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -65,21 +67,40 @@ public class GameListAdapter extends BaseAdapter {
         if (view == null) {
             view = inflater.inflate(R.layout.game_list_item, parent, false);
         }
-
         final Game game = games.get(position);
 
         TextView title = view.findViewById(R.id.title);
         Button deleteButton = view.findViewById(R.id.deleteButton);
-
+        Button addButton = view.findViewById(R.id.addButton);
+        final EditText gameName = view.findViewById(R.id.gameName);
         title.setText(game.getName());
 
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                games.remove(position);
-                notifyDataSetChanged();
+                removeItem(position);
+                StringBuilder stringBuilder = new StringBuilder();
+
+                for (Game game : games) {
+                    stringBuilder.append(game.getName());
+                    stringBuilder.append(";");
+                }
+                ((MainActivity) v.getContext()).saveText(stringBuilder.toString());
             }
         });
+        addButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addItem(new Game(gameName.getText().toString()));
+                StringBuilder stringBuilder = new StringBuilder();
+                for (Game game : games) {
+                    stringBuilder.append(game.getName());
+                    stringBuilder.append(";");
+                }
+                ((MainActivity) v.getContext()).saveText(stringBuilder.toString());
+            }
+        });
+
 
         deleteButton.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
